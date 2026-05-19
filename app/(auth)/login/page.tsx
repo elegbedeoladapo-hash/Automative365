@@ -1,21 +1,24 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState, FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import Link from 'next/link';
 import { FiMail, FiLock, FiArrowRight } from 'react-icons/fi';
 
 export default function LoginPage() {
-  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    if (!formData.email || !formData.password) {
+      setError('Please fill in all fields');
+      return;
+    }
+    setError('');
     setIsLoading(true);
 
     await new Promise(resolve => setTimeout(resolve, 1500));
@@ -36,7 +39,6 @@ export default function LoginPage() {
       localStorage.setItem('user', userData);
     } catch (err) {}
 
-    // Force hard redirect — fixes Safari
     window.location.href = '/dashboard';
   };
 
@@ -69,7 +71,13 @@ export default function LoginPage() {
           <p className="text-white/60">Sign in to access your dashboard</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="glass-dark rounded-3xl p-8 space-y-6">
+        {error && (
+          <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm text-center">
+            {error}
+          </div>
+        )}
+
+        <div className="glass-dark rounded-3xl p-8 space-y-6">
           <div>
             <label className="block text-sm font-medium mb-2 text-white/80">
               Email Address
@@ -78,7 +86,6 @@ export default function LoginPage() {
               <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={20} />
               <input
                 type="email"
-                required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-neon-yellow text-white placeholder-white/40"
@@ -95,7 +102,6 @@ export default function LoginPage() {
               <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={20} />
               <input
                 type="password"
-                required
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-neon-yellow text-white placeholder-white/40"
@@ -105,7 +111,8 @@ export default function LoginPage() {
           </div>
 
           <motion.button
-            type="submit"
+            type="button"
+            onClick={handleSubmit}
             disabled={isLoading}
             whileHover={{ scale: isLoading ? 1 : 1.02 }}
             whileTap={{ scale: isLoading ? 1 : 0.98 }}
@@ -131,7 +138,7 @@ export default function LoginPage() {
               Join Now
             </Link>
           </p>
-        </form>
+        </div>
       </motion.div>
     </div>
   );
