@@ -110,27 +110,20 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <motion.button
+          <button
             type="button"
             onClick={handleSubmit}
             disabled={isLoading}
-            whileHover={{ scale: isLoading ? 1 : 1.02 }}
-            whileTap={{ scale: isLoading ? 1 : 0.98 }}
-            className="w-full py-4 bg-neon-yellow text-black rounded-xl font-bold flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-4 bg-neon-yellow text-black rounded-xl font-bold flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95 transition-transform"
           >
             {isLoading ? (
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-              >
-                ⏳
-              </motion.div>
+              <span>Loading...</span>
             ) : (
               <>
                 Sign In <FiArrowRight />
               </>
             )}
-          </motion.button>
+          </button>
 
           <p className="text-center text-white/60 text-sm">
             Not a member?{' '}
