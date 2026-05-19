@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { BsCloudRain } from 'react-icons/bs';
+import Link from 'next/link';
 
 export default function HeroSection() {
   return (
@@ -77,16 +78,20 @@ export default function HeroSection() {
           </motion.p>
 
           {/* CTA Button */}
-          <motion.button
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
-            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(202, 255, 51, 0.4)' }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-12 px-10 py-4 bg-neon-yellow text-black rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all z-20 relative"
+            className="mt-12"
           >
-            Explore Membership
-          </motion.button>
+            <Link href="/membership">
+              <button
+                className="px-10 py-4 bg-neon-yellow text-black rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all active:scale-95"
+              >
+                Explore Membership
+              </button>
+            </Link>
+          </motion.div>
         </div>
       </div>
 

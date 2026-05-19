@@ -100,13 +100,12 @@ export default function Navbar() {
               </div>
 
               {/* Mobile Menu Button */}
-              <motion.button
-                whileTap={{ scale: 0.9 }}
+              <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="md:hidden w-10 h-10 flex items-center justify-center text-white"
               >
                 {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-              </motion.button>
+              </button>
             </div>
 
             {/* Mobile Menu */}
@@ -115,32 +114,30 @@ export default function Navbar() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="md:hidden mt-4 pt-4 border-t border-white/10"
+                className="md:hidden mt-4 pt-4 border-t border-white/10 flex flex-col gap-2"
               >
                 {navItems.map((item, index) => (
-                  <Link key={index} href={item.href}>
-                    <motion.button
-                      onClick={() => setIsOpen(false)}
-                      whileTap={{ scale: 0.95 }}
-                      className={`w-full text-left py-3 px-4 rounded-xl mb-2 transition-all ${
+                  <Link key={index} href={item.href} onClick={() => setIsOpen(false)}>
+                    <button
+                      className={`w-full text-left py-3 px-4 rounded-xl transition-all ${
                         pathname === item.href
                           ? 'bg-neon-yellow text-black font-bold'
                           : 'text-white/70 hover:bg-white/5'
                       }`}
                     >
                       {item.name}
-                    </motion.button>
+                    </button>
                   </Link>
                 ))}
 
                 <Link href="/login" onClick={() => setIsOpen(false)}>
-                  <button className="w-full mt-2 py-3 border border-neon-yellow text-neon-yellow rounded-xl font-bold">
+                  <button className="w-full py-3 border border-neon-yellow text-neon-yellow rounded-xl font-bold">
                     Login
                   </button>
                 </Link>
 
                 <Link href="/signup" onClick={() => setIsOpen(false)}>
-                  <button className="w-full mt-3 py-3 bg-neon-yellow text-black rounded-xl font-bold">
+                  <button className="w-full py-3 bg-neon-yellow text-black rounded-xl font-bold">
                     Join Now
                   </button>
                 </Link>
