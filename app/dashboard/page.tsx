@@ -74,7 +74,6 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-black flex">
 
-      {/* Mobile overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/60 z-20 lg:hidden"
@@ -82,14 +81,12 @@ export default function DashboardPage() {
         />
       )}
 
-      {/* Sidebar */}
       <aside className={`
         fixed top-0 left-0 h-full w-64 bg-neutral-950 border-r border-white/10 z-30
         flex flex-col transition-transform duration-300
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         lg:translate-x-0 lg:static lg:z-auto
       `}>
-        {/* Logo */}
         <div className="p-6 border-b border-white/10 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
             <div className="w-10 h-10 bg-neon-yellow/10 rounded-xl flex items-center justify-center border border-neon-yellow/30">
@@ -102,7 +99,6 @@ export default function DashboardPage() {
           </button>
         </div>
 
-        {/* Nav */}
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
           {navItems.map(({ icon: Icon, label, href }) => (
             <Link
@@ -117,7 +113,6 @@ export default function DashboardPage() {
           ))}
         </nav>
 
-        {/* User + Logout */}
         <div className="p-4 border-t border-white/10">
           <div className="flex items-center gap-3 px-4 py-3 mb-2">
             <div className="w-8 h-8 rounded-full bg-neon-yellow/20 flex items-center justify-center flex-shrink-0">
@@ -137,10 +132,8 @@ export default function DashboardPage() {
         </div>
       </aside>
 
-      {/* Main content */}
       <main className="flex-1 min-h-screen overflow-y-auto">
 
-        {/* Top bar (mobile) */}
         <div className="sticky top-0 z-10 bg-black/80 backdrop-blur border-b border-white/10 px-4 py-4 flex items-center justify-between lg:hidden">
           <button onClick={() => setSidebarOpen(true)} className="text-white">
             <FiMenu size={24} />
@@ -153,10 +146,8 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Page content */}
         <div className="p-4 md:p-8 max-w-4xl mx-auto">
 
-          {/* Welcome */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -169,7 +160,6 @@ export default function DashboardPage() {
             <p className="text-white/50 text-sm md:text-base">Here's your 363 Club dashboard</p>
           </motion.div>
 
-          {/* Stats cards */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -182,7 +172,7 @@ export default function DashboardPage() {
               { icon: FiTruck, label: 'Vehicles Stored', value: '0' },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="bg-white/5 border border-white/10 rounded-2xl p-5 flex items-center gap-4 sm:flex-col sm:items-start sm:gap-3">
-                <div className="w-10 h-10 rounded-xl bg-neon-yellow/10 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-neon-yellow/10 flex items-center justify-center shrink-0">
                   <Icon size={18} className="text-neon-yellow" />
                 </div>
                 <div>
@@ -193,7 +183,6 @@ export default function DashboardPage() {
             ))}
           </motion.div>
 
-          {/* Quick Actions */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
