@@ -51,7 +51,7 @@ export default function Navbar() {
                   whileTap={{ scale: 0.95 }}
                   className="flex items-center gap-3 cursor-pointer"
                 >
-                  <div className="w-12 h-12 bg-neon-yellow/10 rounded-xl flex items-center justify-center border border-neon-yellow/20 group-hover:bg-neon-yellow transition-all">
+                  <div className="w-12 h-12 bg-neon-yellow/10 rounded-xl flex items-center justify-center border border-neon-yellow/20">
                     <span className="text-2xl font-bold text-neon-yellow">363</span>
                   </div>
                   <span className="hidden md:block text-xl font-bold">
@@ -78,15 +78,25 @@ export default function Navbar() {
                   </Link>
                 ))}
                 
+                <Link href="/login">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="ml-2 px-6 py-2.5 border border-neon-yellow text-neon-yellow rounded-xl font-bold hover:bg-neon-yellow hover:text-black transition-all"
+                  >
+                    Login
+                  </motion.button>
+                </Link>
+
                 <Link href="/signup">
-  <motion.button
-    whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(202, 255, 51, 0.3)' }}
-    whileTap={{ scale: 0.95 }}
-    className="ml-2 px-6 py-2.5 bg-neon-yellow text-black rounded-xl font-bold"
-  >
-    Join Now
-  </motion.button>
-</Link>
+                  <motion.button
+                    whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(202, 255, 51, 0.3)' }}
+                    whileTap={{ scale: 0.95 }}
+                    className="ml-2 px-6 py-2.5 bg-neon-yellow text-black rounded-xl font-bold"
+                  >
+                    Join Now
+                  </motion.button>
+                </Link>
               </div>
 
               {/* Mobile Menu Button */}
@@ -122,12 +132,18 @@ export default function Navbar() {
                     </motion.button>
                   </Link>
                 ))}
-                <motion.button
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full mt-4 py-3 bg-neon-yellow text-black rounded-xl font-bold"
-                >
-                  Join Now
-                </motion.button>
+
+                <Link href="/login" onClick={() => setIsOpen(false)}>
+                  <button className="w-full mt-2 py-3 border border-neon-yellow text-neon-yellow rounded-xl font-bold">
+                    Login
+                  </button>
+                </Link>
+
+                <Link href="/signup" onClick={() => setIsOpen(false)}>
+                  <button className="w-full mt-3 py-3 bg-neon-yellow text-black rounded-xl font-bold">
+                    Join Now
+                  </button>
+                </Link>
               </motion.div>
             )}
           </motion.div>
