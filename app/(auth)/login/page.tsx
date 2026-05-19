@@ -20,7 +20,26 @@ export default function LoginPage() {
 
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    localStorage.setItem('isAuthenticated', 'true');
+    try {
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('user', JSON.stringify({
+        name: formData.email.split('@')[0],
+        email: formData.email,
+        phone: '',
+        memberSince: new Date().toISOString(),
+        tier: 'Premium',
+      }));
+    } catch (err) {
+      sessionStorage.setItem('isAuthenticated', 'true');
+      sessionStorage.setItem('user', JSON.stringify({
+        name: formData.email.split('@')[0],
+        email: formData.email,
+        phone: '',
+        memberSince: new Date().toISOString(),
+        tier: 'Premium',
+      }));
+    }
+
     router.push('/dashboard');
   };
 

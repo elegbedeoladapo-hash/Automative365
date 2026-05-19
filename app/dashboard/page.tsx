@@ -23,15 +23,20 @@ export default function DashboardPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    const isAuth = localStorage.getItem('isAuthenticated');
+    const isAuth = localStorage.getItem('isAuthenticated') ||
+                   sessionStorage.getItem('isAuthenticated');
     if (!isAuth) { router.push('/login'); return; }
-    const userData = localStorage.getItem('user');
+
+    const userData = localStorage.getItem('user') ||
+                     sessionStorage.getItem('user');
     if (userData) setUser(JSON.parse(userData));
   }, [router]);
 
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('user');
+    sessionStorage.removeItem('isAuthenticated');
+    sessionStorage.removeItem('user');
     router.push('/');
   };
 
