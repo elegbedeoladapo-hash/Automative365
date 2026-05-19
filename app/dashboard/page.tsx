@@ -22,21 +22,31 @@ export default function DashboardPage() {
   const [user, setUser] = useState<UserData | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const getCookie = (name: string) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(';').shift();
+    return null;
+  };
+
   useEffect(() => {
-    const isAuth = localStorage.getItem('isAuthenticated') ||
-                   sessionStorage.getItem('isAuthenticated');
+    const isAuth = getCookie('isAuthenticated') ||
+                   localStorage.getItem('isAuthenticated');
     if (!isAuth) { router.push('/login'); return; }
 
-    const userData = localStorage.getItem('user') ||
-                     sessionStorage.getItem('user');
+    const userCookie = getCookie('user');
+    const userData = userCookie
+      ? decodeURIComponent(userCookie)
+      : localStorage.getItem('user');
+
     if (userData) setUser(JSON.parse(userData));
   }, [router]);
 
   const handleLogout = () => {
+    document.cookie = 'isAuthenticated=; path=/; max-age=0';
+    document.cookie = 'user=; path=/; max-age=0';
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('user');
-    sessionStorage.removeItem('isAuthenticated');
-    sessionStorage.removeItem('user');
     router.push('/');
   };
 

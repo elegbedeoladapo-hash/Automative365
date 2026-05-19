@@ -20,25 +20,23 @@ export default function LoginPage() {
 
     await new Promise(resolve => setTimeout(resolve, 1500));
 
+    const userData = JSON.stringify({
+      name: formData.email.split('@')[0],
+      email: formData.email,
+      phone: '',
+      memberSince: new Date().toISOString(),
+      tier: 'Premium',
+    });
+
+    // Set cookies — works on all browsers including Safari
+    document.cookie = `isAuthenticated=true; path=/; max-age=86400; SameSite=Lax`;
+    document.cookie = `user=${encodeURIComponent(userData)}; path=/; max-age=86400; SameSite=Lax`;
+
+    // Also try localStorage as backup
     try {
       localStorage.setItem('isAuthenticated', 'true');
-      localStorage.setItem('user', JSON.stringify({
-        name: formData.email.split('@')[0],
-        email: formData.email,
-        phone: '',
-        memberSince: new Date().toISOString(),
-        tier: 'Premium',
-      }));
-    } catch (err) {
-      sessionStorage.setItem('isAuthenticated', 'true');
-      sessionStorage.setItem('user', JSON.stringify({
-        name: formData.email.split('@')[0],
-        email: formData.email,
-        phone: '',
-        memberSince: new Date().toISOString(),
-        tier: 'Premium',
-      }));
-    }
+      localStorage.setItem('user', userData);
+    } catch (err) {}
 
     router.push('/dashboard');
   };
