@@ -1,9 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Link from 'next/link';
-import { FiMail, FiLock, FiArrowRight, FiArrowLeft } from 'react-icons/fi';
+import { FiMail, FiLock, FiArrowRight } from 'react-icons/fi';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -54,15 +53,6 @@ export default function LoginPage() {
       </div>
 
       <div className="relative w-full max-w-md" style={{ zIndex: 10 }}>
-
-        {/* Back to Home */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-white/50 hover:text-white transition-colors mb-6 text-sm w-fit"
-        >
-          <FiArrowLeft size={16} />
-          Back to Home
-        </Link>
 
         <Link href="/">
           <div className="w-16 h-16 bg-neon-yellow/10 rounded-xl flex items-center justify-center border border-neon-yellow/20 mx-auto mb-8 cursor-pointer">
