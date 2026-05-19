@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Link from 'next/link';
-import { FiMail, FiLock, FiArrowRight } from 'react-icons/fi';
+import { FiMail, FiLock, FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -44,24 +44,30 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center px-4 py-12">
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+
+      <div
+        className="fixed inset-0 overflow-hidden pointer-events-none select-none"
+        style={{ zIndex: -1 }}
+      >
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-yellow/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-yellow/10 rounded-full blur-3xl" />
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="relative z-10 w-full max-w-md"
-      >
+      <div className="relative w-full max-w-md" style={{ zIndex: 10 }}>
+
+        {/* Back to Home */}
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-white/50 hover:text-white transition-colors mb-6 text-sm w-fit"
+        >
+          <FiArrowLeft size={16} />
+          Back to Home
+        </Link>
+
         <Link href="/">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="w-16 h-16 bg-neon-yellow/10 rounded-xl flex items-center justify-center border border-neon-yellow/20 mx-auto mb-8 cursor-pointer"
-          >
+          <div className="w-16 h-16 bg-neon-yellow/10 rounded-xl flex items-center justify-center border border-neon-yellow/20 mx-auto mb-8 cursor-pointer">
             <span className="text-3xl font-bold text-neon-yellow">363</span>
-          </motion.div>
+          </div>
         </Link>
 
         <div className="text-center mb-10">
@@ -114,7 +120,8 @@ export default function LoginPage() {
             type="button"
             onClick={handleSubmit}
             disabled={isLoading}
-            className="w-full py-4 bg-neon-yellow text-black rounded-xl font-bold flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95 transition-transform"
+            style={{ zIndex: 20, position: 'relative' }}
+            className="w-full py-4 bg-neon-yellow text-black rounded-xl font-bold flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95 transition-transform cursor-pointer"
           >
             {isLoading ? (
               <span>Loading...</span>
@@ -132,7 +139,7 @@ export default function LoginPage() {
             </Link>
           </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
